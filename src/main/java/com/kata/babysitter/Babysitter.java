@@ -11,6 +11,10 @@ public class Babysitter {
         if (starTime.toLocalTime().isBefore(MINIMUM_START_TIME_ALLOWED)) {
             throw new InvalidTimeException("Please ensure startTime is after "+MINIMUM_START_TIME_ALLOWED.toString());
         }
+
+        if (endTime.toLocalTime().isAfter(MAXIMUM_END_TIME_ALLOWED)) {
+            throw new InvalidTimeException("Please ensure startTime is before "+MAXIMUM_END_TIME_ALLOWED.toString());
+        }
         return 0;
     }
 }

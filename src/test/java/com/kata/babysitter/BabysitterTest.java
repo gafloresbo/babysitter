@@ -16,4 +16,13 @@ public class BabysitterTest {
 
         assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
     }
+
+    @Test
+    public void whenBabysitterEndTimeIsAfter400ThrowsException() {
+        LocalDateTime starTime = LocalDateTime.of(2019, 8, 18, 17, 0);
+        LocalDateTime endTime = LocalDateTime.of(2019, 8, 19, 6, 0);
+        Babysitter babysitter = new Babysitter();
+
+        assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
+    }
 }
