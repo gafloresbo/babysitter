@@ -23,7 +23,7 @@ public class BabysitterTest {
         LocalDateTime endTime = LocalDateTime.of(2019, 8, 18, 19, 0);
 
         InvalidTimeException exception = assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
-        assertEquals("Please ensure startTime is after 17:00", exception.getMessage());
+        assertEquals("Invalid StartTime. Please ensure startTime is after 17:00", exception.getMessage());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class BabysitterTest {
         LocalDateTime endTime = LocalDateTime.of(2019, 8, 19, 6, 0);
 
         InvalidTimeException exception = assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
-        assertEquals("Please ensure endTime is before 04:00", exception.getMessage());
+        assertEquals("Invalid Endtime. Please ensure endTime is before 04:00", exception.getMessage());
     }
 
     @Test

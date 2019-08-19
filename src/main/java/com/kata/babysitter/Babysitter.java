@@ -7,19 +7,24 @@ public class Babysitter {
     private final LocalTime MINIMUM_START_TIME_ALLOWED = LocalTime.of(17, 0);
     private final LocalTime MAXIMUM_END_TIME_ALLOWED = LocalTime.of(4, 0);
 
-    public int pay(LocalDateTime starTime, LocalDateTime endTime, String a) {
-        if (endTime.isBefore(starTime)) {
+    public int pay(LocalDateTime starDateAndTime, LocalDateTime endDateAndTime, String family) {
+        validateTimes(starDateAndTime, endDateAndTime);
+        return 0;
+    }
+
+    private void validateTimes(LocalDateTime starDateAndTime, LocalDateTime endDateAndTime) {
+        if (endDateAndTime.isBefore(starDateAndTime)) {
             throw new InvalidTimeException("Please ensure startTime is earlier than endTime");
         }
 
-        if (starTime.toLocalTime().isBefore(MINIMUM_START_TIME_ALLOWED)) {
-            throw new InvalidTimeException("Please ensure startTime is after " + MINIMUM_START_TIME_ALLOWED.toString());
-        }
+        LocalTime startTime = starDateAndTime.toLocalTime();
+        LocalTime endTime = endDateAndTime.toLocalTime();
 
-        if (endTime.toLocalTime().isAfter(MAXIMUM_END_TIME_ALLOWED)) {
-            throw new InvalidTimeException("Please ensure endTime is before " + MAXIMUM_END_TIME_ALLOWED.toString());
+        if (startTime.isAfter(MAXIMUM_END_TIME_ALLOWED) && startTime.isBefore(MINIMUM_START_TIME_ALLOWED)) {
+            throw new InvalidTimeException("Invalid StartTime. Please ensure startTime is after " + MINIMUM_START_TIME_ALLOWED.toString());
         }
-
-        return 0;
+        if (endTime.isAfter(MAXIMUM_END_TIME_ALLOWED) && endTime.isBefore(MINIMUM_START_TIME_ALLOWED)) {
+            throw new InvalidTimeException("Invalid Endtime. Please ensure endTime is before " + MAXIMUM_END_TIME_ALLOWED.toString());
+        }
     }
 }
