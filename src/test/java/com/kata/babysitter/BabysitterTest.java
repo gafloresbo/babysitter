@@ -1,7 +1,6 @@
 package com.kata.babysitter;
 
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,6 +20,15 @@ public class BabysitterTest {
     public void whenBabysitterEndTimeIsAfter400ThrowsException() {
         LocalDateTime starTime = LocalDateTime.of(2019, 8, 18, 17, 0);
         LocalDateTime endTime = LocalDateTime.of(2019, 8, 19, 6, 0);
+        Babysitter babysitter = new Babysitter();
+
+        assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
+    }
+
+    @Test
+    public void whenBabysitterEndTimeIsBeforeStartTimeThrowsException() {
+        LocalDateTime starTime = LocalDateTime.of(2019, 8, 18, 22, 0);
+        LocalDateTime endTime = LocalDateTime.of(2019, 8, 18, 18, 0);
         Babysitter babysitter = new Babysitter();
 
         assertThrows(InvalidTimeException.class, () -> babysitter.pay(starTime, endTime, "A"));
